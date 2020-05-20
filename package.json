@@ -5,8 +5,8 @@
   "main": "src/index.js",
   "scripts": {
     "deploy": "npm run deploySubmitter && npm run deployChecker",
-    "deploySubmitter": "gcloud --project=$GCP_PROJECT functions deploy $GCF_FUNCTION_NAME_SUBMITTER --runtime=nodejs10 --trigger-http --source=. --max-instances=1 --memory=128MB --timeout=50s",
-    "deployChecker": "gcloud --project=$GCP_PROJECT functions deploy $GCF_FUNCTION_NAME_CHECKER --runtime=nodejs10 --trigger-http --source=. --max-instances=1 --memory=128MB --timeout=50s",
+    "deploySubmitter": "gcloud --project=$GCP_PROJECT functions deploy $GCF_FUNCTION_NAME_SUBMITTER --runtime=nodejs10 --trigger-http --source=. --max-instances=1 --memory=128MB --timeout=50s --no-user-output-enabled",
+    "deployChecker": "gcloud --project=$GCP_PROJECT functions deploy $GCF_FUNCTION_NAME_CHECKER --runtime=nodejs10 --trigger-http --source=. --max-instances=1 --memory=128MB --timeout=50s --no-user-output-enabled",
     "pretest": "eslint src test",
     "test": "mocha test"
   },

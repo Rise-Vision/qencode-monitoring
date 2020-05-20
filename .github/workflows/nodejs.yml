@@ -5,7 +5,7 @@ name: Deployment Workflow
 
 on:
   push:
-    branches: [ stage/**, master ]
+    branches: [ stage/**, fix/**, feature/**, master ]
 
 jobs:
   deploy:
