@@ -8,8 +8,10 @@ const queueDelaySecs = 5;
 const task = {
   httpRequest: {
     httpMethod: "POST",
-    url: "https://us-central1-rvacore-test.cloudfunctions.net/checkEncodingJobStatus",
-    oidcToken: {},
+    url: process.env.TASK_CHECKER_TRIGGER_URL,
+    oidcToken: {
+      serviceAccountEmail: process.env.TASK_SERVICE_ACCOUNT_EMAIL
+    },
     headers: {
       'Content-Type': 'application/json',
     },
@@ -18,7 +20,6 @@ const task = {
 
 exports.submitJobStatusTask = jobData=>{
   task.httpRequest.body = Buffer.from(JSON.stringify(jobData)).toString("base64");
-  task.httpRequest.oidcToken.serviceAccountEmail = jobData.TASK_SERVICE_ACCOUNT_EMAIL;
 
   task.scheduleTime = {
     seconds: queueDelaySecs + Date.now() / 1000,
