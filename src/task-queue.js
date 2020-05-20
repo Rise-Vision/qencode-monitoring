@@ -1,16 +1,21 @@
 const {CloudTasksClient} = require("@google-cloud/tasks");
 const client = new CloudTasksClient();
-const project = "rvacore-test";
-const region = "us-central1";
-const queue = "default";
 const queueDelaySecs = 5;
+
+const {
+  GCP_PROJECT,
+  GCP_REGION,
+  QUEUE_NAME,
+  TASK_CHECKER_TRIGGER_URL,
+  TASK_SERVICE_ACCOUNT_EMAIL
+} = process.env;
 
 const task = {
   httpRequest: {
     httpMethod: "POST",
-    url: process.env.TASK_CHECKER_TRIGGER_URL,
+    url: TASK_CHECKER_TRIGGER_URL,
     oidcToken: {
-      serviceAccountEmail: process.env.TASK_SERVICE_ACCOUNT_EMAIL
+      serviceAccountEmail: TASK_SERVICE_ACCOUNT_EMAIL
     },
     headers: {
       'Content-Type': 'application/json',
@@ -26,7 +31,7 @@ exports.submitJobStatusTask = jobData=>{
   };
 
   return client.createTask({
-    parent: client.queuePath(project, region, queue),
+    parent: client.queuePath(GCP_PROJECT, GCP_REGION, QUEUE_NAME),
     task
   });
 };
