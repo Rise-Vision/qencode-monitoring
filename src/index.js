@@ -9,6 +9,7 @@ const {
   ENCODING_BUCKET,
   ENCODING_STORAGE_ACCESS_KEY,
   ENCODING_STORAGE_SECRET,
+  ACCEPTABLE_DURATION_SECS
 } = process.env;
 
 gax.defaults = {
@@ -81,7 +82,13 @@ exports.checkEncodingJobStatus = (req, resp)=>{
   .then(([metadata])=>{
     const success = metadata.name === task_token && Number(metadata.size) > 0;
     const ms = new Date(metadata.timeCreated) - new Date(encoding_start_time);
-    if (success) console.log(`Encoding task: ${task_token} took ${ms / 1000}s`);
+    const acceptable = ms / 1000 <= Number(ACCEPTABLE_DURATION_SECS);
+
+    if (success) {
+      console.log(`Encoding task: ${task_token} took ${ms / 1000}s`);
+      console.log(`${acceptable ? "acceptable" : "unacceptable"} duration`);
+    }
+
     return resp.status(200).end();
   })
   .catch(e=>{
