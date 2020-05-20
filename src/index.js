@@ -9,7 +9,6 @@ const {
   ENCODING_BUCKET,
   ENCODING_STORAGE_ACCESS_KEY,
   ENCODING_STORAGE_SECRET,
-  TASK_SERVICE_ACCOUNT_EMAIL,
 } = process.env;
 
 gax.defaults = {
@@ -32,7 +31,6 @@ exports.beginNewEncodingHealthCheck = (req, resp)=>{
     ENCODING_STORAGE_SECRET,
     ENCODING_STORAGE_ACCESS_KEY,
     ENCODING_BUCKET,
-    TASK_SERVICE_ACCOUNT_EMAIL
   };
 
   return gax.request({url: "/access_token", data: `api_key=${ENCODING_API_KEY}`})
