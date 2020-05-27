@@ -16,6 +16,9 @@ gax.defaults = {
   baseURL: "https://api.qencode.com/v1",
   method: "POST",
   timeout: 5000,
+  retryConfig: {
+    httpMethodsToRetry: ["GET","PUT","HEAD","OPTIONS","DELETE", "POST"]
+  },
   headers: {
     "content-type": "application/x-www-form-urlencoded"
   }
