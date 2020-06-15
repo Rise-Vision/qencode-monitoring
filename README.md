@@ -1,4 +1,4 @@
-# Qencode Monitoring ![Deployment Workflow](https://github.com/Rise-Vision/qencode-monitoring/workflows/Deployment%20Workflow/badge.svg?branch=master&event=push)
+# Qencode Monitoring ![Deployment Workflow](https://github.com/Rise-Vision/qencode-monitoring/workflows/Deployment%20Workflow/badge.svg?branch=master&event=push) ![Code Scanning](https://github.com/Rise-Vision/qencode-monitoring/workflows/Code%20scanning%20-%20action/badge.svg)
 
 This project is used to monitor the Qencode encoding service so that we will be alerted if there is a problem encoding files. In that case we can turn off the [master switch] to disable encoding while investigating.
 
